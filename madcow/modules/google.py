@@ -2,7 +2,7 @@
 
 from madcow.util import Module, strip_html
 from madcow.util.text import decode
-from madcow.util.http import getsoup
+from madcow.util.http import getsoup, urllib
 import re
 from madcow.util.google import Google
 
@@ -28,7 +28,7 @@ class Main(Module):
 
             name = strip_html(decode(li.h3.renderContents()))
             urlpluscrap = li.h3.a['href'].replace('/url?q=', '')
-            url = urlpluscrap.split('&sa')[0]
+            url = urllib.unquote(urlpluscrap.split('&sa')[0])
             myretval += u'{}: {} \n'.format(name, url)
             contador += 1
 
